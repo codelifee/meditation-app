@@ -19,6 +19,15 @@ const app = () => {
     outline.style.strokeDasharray = outlineLength;
     outline.style.strokeDashoffset = outlineLength;
 
+    //Pick different sounds
+    sounds.forEach(sound => {
+        sound.addEventListener('click', function(){
+            song.src = this.getAttribute('data-sound');
+            video.src = this.getAttribute('data-video');
+            checkPlaying(song);
+        })
+    })
+
     //Play sound
     play.addEventListener('click', () => {
         checkPlaying(song);
@@ -28,9 +37,9 @@ const app = () => {
     timeSelect.forEach(option => {
         console.log(this);
         option.addEventListener("click", function(){
-            fakeDuration = this.getAtrribute("data-time");
+            fakeDuration = this.getAttribute("data-time");
             timeDisplay.textContent = 
-            `${Math.floor(fakeDuration / 60)} : ${Math.floor(fakeDuration % 60)}`;
+            `${Math.floor(fakeDuration / 60)} : ${Math.floor(fakeDuration % 60)}0`;
         });
     });
 
@@ -60,6 +69,12 @@ const app = () => {
 
         //Animate the text
         timeDisplay.textContent = `${minutes}:${seconds}`
+
+        if(currentTime >= fakeDuration){
+            song.pause();
+            song.currentTime = 0;
+            play.src = './svg/play.svg';
+        }
     }
 }
 
