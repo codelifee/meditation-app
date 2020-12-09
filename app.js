@@ -35,7 +35,7 @@ const app = () => {
 
     //Select sound
     timeSelect.forEach(option => {
-        console.log(this);
+        // debugger;
         option.addEventListener("click", function(){
             fakeDuration = this.getAttribute("data-time");
             timeDisplay.textContent = 
